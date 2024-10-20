@@ -1,4 +1,4 @@
-![](User-Journey-Analysis/cj.jpg)
+![](cj.jpg)
 
 ## Table of Contents
 1. [Introduction](#introduction)
