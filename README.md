@@ -1,4 +1,4 @@
-![](https://github.com/Adeyemi0/User-Journey-Analysis/cj.jpg)
+![](User-Journey-Analysis/cj.jpg)
 
 ## Table of Contents
 1. [Introduction](#introduction)
