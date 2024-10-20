@@ -1,5 +1,21 @@
 ![](https://github.com/Adeyemi0/User-Journey-Analysis/cj.jpg)
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Dataset Description](#dataset-description)
+   - [Source](#source)
+   - [Content](#content)
+3. [Data Preprocessing](#data-preprocessing)
+   - [Key Columns Added](#key-columns-added)
+4. [Insights](#insights)
+   - [Insights from Non-Converting Journeys](#insights-from-non-converting-journeys)
+   - [Insights from Converting Journeys](#insights-from-converting-journeys)
+5. [Churn Transition Analysis](#churn-transition-analysis)
+   - [Key Churn Transitions](#key-churn-transitions)
+6. [Session Length Analysis](#session-length-analysis)
+7. [Recommendations](#recommendations)
+8. [Limitations of the Dataset](#limitations-of-the-dataset)
+
 ## Introduction
 The goal of this project is to analyze the user journey data from a subscription-based platform to uncover insights that can inform strategic decisions aimed at improving conversion rates and reducing user churn. This project focuses on examining the paths users take as they navigate through various pages on the platform, from the initial landing page to key conversion points such as sign-up, log-in, and checkout. By analyzing patterns in both converting and non-converting journeys, we aim to identify the factors that contribute to successful conversions as well as the barriers that lead to user drop-off.
 
