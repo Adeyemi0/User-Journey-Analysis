@@ -1,93 +1,195 @@
 ![](cj.jpg)
 
+# 365’s Online Subscription-Based Learning Platform: User Behavior Analysis
+
 ## Table of Contents
-1. [Introduction](#introduction)
-2. [Dataset Description](#dataset-description)
-   - [Source](#source)
-   - [Content](#content)
-3. [Data Preprocessing](#data-preprocessing)
-   - [Key Columns Added](#key-columns-added)
-4. [Insights](#insights)
-   - [Insights from Non-Converting Journeys](#insights-from-non-converting-journeys)
-   - [Insights from Converting Journeys](#insights-from-converting-journeys)
-5. [Churn Transition Analysis](#churn-transition-analysis)
-   - [Key Churn Transitions](#key-churn-transitions)
-6. [Session Length Analysis](#session-length-analysis)
-7. [Recommendations](#recommendations)
-8. [Limitations of the Dataset](#limitations-of-the-dataset)
+1. [Executive Summary](#executive-summary)
+2. [Objectives](#objectives)
+3. [Introduction](#introduction)
+4. [Data Dictionary](#data-dictionary)
+5. [Analysis](#analysis)
+   - [User Journey Insights](#1-user-journey-insights)
+   - [Start Points and End Points](#2-start-points-and-end-points)
+   - [Conversion Paths](#3-conversion-paths)
+   - [Subscription Type Analysis](#4-subscription-type-analysis)
+   - [Feature Importance for Conversion](#5-feature-importance-for-conversion)
+   - [Drop-Off Points](#6-drop-off-points)
+   - [Summary of Converted vs. Non-Converted Users](#7-summary-of-converted-vs-non-converted-users)
+6. [Recommendations](#recommendations)
+7. [Limitations](#limitations)
+8. [Further Studies](#further-studies)
+9. [Conclusion](#conclusion)
+
+---
+
+## Executive Summary
+
+This analysis explores user behavior on 365’s subscription-based learning platform to identify opportunities for enhancing conversion rates, reducing drop-offs, and improving retention. Key findings include:
+
+- **Repeat Usage**: A significant portion of sessions begin and end with "Log in," indicating strong repeat usage but also missed opportunities for deeper engagement.
+- **Conversion Drivers**: Interactions with coupons and checkout pages are major drivers of conversions, highlighting the effectiveness of promotional offers.
+- **Drop-Off Points**: Sessions frequently terminate at informational pages like "Blog" or "Resources center," suggesting a need for better transitions to action-oriented content.
+- **Subscription-Specific Behaviors**: Annual subscribers engage more deeply with discounts, while monthly and quarterly subscribers exhibit shorter, direct engagement patterns.
+
+Based on these insights, recommendations focus on optimizing login and homepage experiences, enhancing the pricing page, leveraging coupons and promotions, addressing drop-offs from informational pages, tailoring strategies for different subscription types, and improving the conversion journey for non-converting users.
+
+---
+
+## Objectives
+
+The primary objective of this analysis is to explore user behavior on 365’s online subscription-based learning platform. By examining the user journey across various touchpoints, we aim to uncover insights that can guide strategies to enhance conversion rates, reduce user drop-off, and ultimately improve user retention. This analysis focuses on key user interactions, conversion paths, and drop-off points.
+
+---
 
 ## Introduction
-The goal of this project is to analyze the user journey data from a subscription-based platform to uncover insights that can inform strategic decisions aimed at improving conversion rates and reducing user churn. This project focuses on examining the paths users take as they navigate through various pages on the platform, from the initial landing page to key conversion points such as sign-up, log-in, and checkout. By analyzing patterns in both converting and non-converting journeys, we aim to identify the factors that contribute to successful conversions as well as the barriers that lead to user drop-off.
 
-### Dataset Description
-#### Source
-The data was collected from website user logs, tracking user interactions and journeys through various pages.
-Content
-The dataset comprises 9,935 entries, detailing user interactions and journeys. Number of users are 1,350. It includes:
-*	user_id: Unique identifier for each user.
-*	session_id: Identifier for each session.
-*	subscription_type: Type of subscription (e.g., annual, monthly).
-*	user_journey: The sequence of pages visited by users.
+Analyzing user behavior is essential for understanding how users engage with the platform and identifying opportunities for improvement. This project examines user journeys, starting from the homepage and leading to key conversion events such as sign-up, log-in, and checkout. We also evaluate non-converting user behavior to identify drop-off points and obstacles that may prevent users from progressing to conversion. The goal is to provide actionable insights to improve platform navigation, optimize conversion paths, and reduce churn.
 
-### Data Preprocessing
-#### Key Columns Added
-*	cleaned_journey: The sequence of pages visited by users.
-*	is_converted: A binary indicator of whether the user converted.
-*	num_pages: The number of pages a user visits during a session on the website.
-*	journey_length: The number of steps in a user's journey.
+---
 
-## INSIGHTS
-### Insights from Non-Converting Journeys
-#### Top Non-Converting Journeys:
+## Data Dictionary
 
-*	Log in (2,257 occurrences): The most common non-converting journey involves users repeatedly logging in without progressing further in the conversion funnel. This suggests that while users are engaging with the platform, they are not finding a compelling reason or sufficient guidance to move towards a purchase or checkout.
-*	Other (1,012 occurrences): The 'Other' category is the second most common non-converting path. This broad category likely includes a variety of user actions that do not align with the main
-conversion steps. This could indicate a lack of focus or clarity in the user experience, leading to disengagement.
-*	Coupon (1,003 occurrences): A significant number of users interact with coupons but do not proceed to checkout. This could point to issues with coupon validity, application, or a mismatch between coupon expectations and actual discounts offered.
-*	Homepage-Log in (849 occurrences): Users who begin at the homepage and log in but do not proceed further could be existing users who are not finding value in the subsequent steps or new users who lose interest after logging in.
-*	Homepage-Sign up (202 occurrences): Users starting from the homepage and signing up but not converting suggests that while the initial engagement is successful, the follow-through is lacking, potentially due to onboarding issues or unmet expectations post-sign-up.
+- **user_id**: Unique identifier for each user on the platform.
+- **session_id**: Unique identifier for each user session.
+- **subscription_type**: The type of subscription the user holds (Annual, Monthly, Quarterly).
+- **user_journey**: A sequence of pages visited by the user during their session.
 
-### Insights from Converting Journeys
-#### Top Converting Journeys:
-*	Checkout (1,773 occurrences): The most common converting path is straightforward, with users heading directly to checkout. This indicates that these users have already made a decision and are likely repeat customers or those who found what they needed quickly.
-*	Pricing-Checkout (70 occurrences): A significant number of users who check the pricing page proceed to checkout, highlighting the importance of clear, attractive pricing information in driving conversions.
-*	Homepage-Pricing-Checkout (60 occurrences): Users who navigate from the homepage to pricing and then to checkout show a more deliberate decision-making process. These users likely needed to evaluate the cost before committing.
-*	Courses-Pricing-Checkout (6 occurrences): This path, though less frequent, shows that some users who explore course options before checking pricing still convert, indicating that course offerings are a factor in their purchase decisions.
-*	Homepage-Pricing-Checkout-Homepage-Log in (4 occurrences): This journey, while rare, suggests a more complex decision-making process, possibly involving returning users or those who needed to log in to apply a discount or check their account before completing the purchase
+The dataset contains 9,935 rows and 4 columns.
 
-### Churn Transition Analysis
-#### Key Churn Transitions:
-*	Homepage to Log in (912 transitions): This is the most common transition, indicating that a significant number of users log in without proceeding further. This could represent returning users who are not sufficiently re-engaged upon logging in.
-*	Homepage to Sign up (329 transitions): Many users begin signing up but do not complete the conversion. This might suggest a drop-off during or after the sign-up process.
-*	Homepage to Pricing (307 transitions): Users who navigate from the homepage to the pricing page are considering a purchase but may not find the pricing compelling enough to continue.
-*	Homepage to Career tracks (280 transitions): Users exploring career tracks from the homepage indicate interest in specific content areas but may not find a direct path to conversion.
-*	Career tracks to Courses (265 transitions): Users moving from career tracks to courses suggest that while there is interest in content, it does not necessarily translate into conversions, perhaps due to unclear value propositions or pricing.
+---
 
-### Session Length Analysis
-The average session length is 1.70 pages, indicating that most users are not deeply exploring the site. This relatively short session length suggests that users either find what they need quickly (in the case of converting users) or do not engage deeply enough to convert (in the case of non-converting users).
+## Analysis
 
-## RECOMMENDATION
-1.	Enhance the Onboarding Process:
-Simplify Sign-Up and Log-In: Streamline the sign-up and log-in processes to ensure that users can move quickly from these steps into more valuable interactions. Consider implementing guided walkthroughs or tooltips to help new users navigate the platform more effectively.
+### 1. **User Journey Insights**
 
-Improve Post-Login Engagement: For users who log in without converting, provide personalized content or offers that could nudge them towards conversion, such as reminders of items left in their cart or special discounts.
+Top Interactions:
+- The most frequent interaction across the platform is logging in, followed by accessing the homepage and checkout.
+- | Step       | Count  |
+  |------------|--------|
+  | Log in     | 3,798  |
+  | Homepage   | 2,396  |
+  | Checkout   | 2,021  |
+  | Sign up    | 1,210  |
+  | Coupon     | 1,041  |
 
-2.	Revamp the Pricing Page:
-Clearer Value Propositions: Ensure that the pricing page clearly communicates the value users receive for each pricing tier. Include testimonials, case studies, or specific benefits to make the pricing more compelling.
+Login Dominance:
+- The "Log in" step appears in both start and end points of the user journeys, suggesting repeat sessions without progressing beyond basic engagement.
 
-Simplify Coupon Application: Address any potential issues with coupon application to ensure users can easily apply discounts without frustration. Consider A/B testing different coupon presentations to see which drives higher conversions.
+### 2. **Start Points and End Points**
 
-3.	Focus on Retargeting Non-Converting Users:
-Targeted Campaigns: Use retargeting strategies to bring back users who frequently log in without converting. Personalized emails or ads that address their specific behaviors on the site (e.g., viewed pricing but didn’t purchase) could be effective.
+Start Points:
+- Most sessions begin with users logging in or landing on the homepage.
+- | Start Point | Count  |
+  |-------------|--------|
+  | Log in      | 2,379  |
+  | Homepage    | 2,329  |
+  | Checkout    | 1,776  |
 
-## LIMITATIONS OF THE DATASET
-1.	The lack of timestamp data limits the ability to perform true recency and churn analyses.
-2.	The data does not differentiate between types of users (e.g., new vs. returning), which could provide deeper insights into behavior patterns.
+End Points:
+- Sessions tend to terminate either at the checkout or login page.
+- | End Point   | Count  |
+  |-------------|--------|
+  | Log in      | 3,601  |
+  | Checkout    | 1,964  |
+  | Coupon      | 1,029  |
+  | Sign up     | 883    |
 
+Non-Converting Users:
+- A large number of non-converting users terminate at the "Log in" or "Homepage" steps without progressing to conversion actions.
 
+### 3. **Conversion Paths**
 
+Top 5 Conversion Paths:
+- Users who convert most often do so after visiting the checkout page directly.
+- | Conversion Path            | Count  |
+  |----------------------------|--------|
+  | Checkout                   | 1,773  |
+  | Pricing → Checkout         | 72     |
+  | Homepage → Pricing → Checkout | 68     |
+  | Courses → Pricing → Checkout | 7      |
+  | Other → Pricing → Checkout | 3      |
 
+Coupon Influence:
+- Coupon usage contributes significantly to conversions.
 
+### 4. **Subscription Type Analysis**
 
+- **Annual Subscribers**: Engage more frequently with the "Log in" and "Coupon" steps, indicating loyalty and recurring discount usage.
+- **Monthly and Quarterly Subscribers**: Exhibit shorter, direct engagement patterns, often navigating directly to checkout.
 
+### 5. **Feature Importance for Conversion**
 
+Key Drivers:
+- Visits to the "Log in" page, followed by interactions with the "Other" and "Coupon" pages.
+- | Feature           | Importance  |
+  |-------------------|-------------|
+  | visited_Log in    | 0.279290    |
+  | visited_Other     | 0.201344    |
+  | visited_Coupon    | 0.190997    |
+
+### 6. **Drop-Off Points**
+
+Drop-Off on Blog:
+- Sessions terminating at the blog page reflect disengagement. Clear calls-to-action or product recommendations could address this issue.
+
+### 7. **Summary of Converted vs. Non-Converted Users**
+
+Converting Users:
+- Tend to have shorter journeys with focused interactions on high-value pages like checkout and pricing.
+
+Non-Converting Users:
+- Often bounce after engaging with low-value or exploratory pages.
+
+---
+
+## Recommendations
+
+1. **Optimize Login and Homepage Experiences**:
+   - Implement personalized recommendations or notifications upon login to guide users toward meaningful actions.
+
+2. **Enhance Pricing Page**:
+   - Make the pricing page more visible and appealing with clearer value propositions or promotions.
+
+3. **Leverage Coupons and Promotions**:
+   - Expand targeted promotional campaigns and offer personalized discounts to encourage more users to proceed to checkout.
+
+4. **Address Drop-Offs from Informational Pages**:
+   - Add clear calls-to-action or embed product recommendations within blog posts to guide users toward higher-value pages.
+
+5. **Tailored Strategies for Different Subscription Types**:
+   - Offer subscription-specific retention strategies, such as renewal incentives or exclusive content, to reduce churn.
+
+6. **Improve Conversion Journey for Non-Converting Users**:
+   - Engage non-converting users with personalized content and reminders earlier in their sessions to drive higher conversions.
+
+---
+
+## Limitations
+
+1. **Limited Session Length Data**:
+   - No clear indication of how long users spend in each session, making it difficult to analyze engagement time.
+
+2. **Lack of Demographic Information**:
+   - No demographic data (e.g., age, location, gender) to tailor recommendations based on user profiles.
+
+3. **Generalized User Journey Paths**:
+   - No differentiation between new and returning users, which could affect behavior pattern analysis.
+
+---
+
+## Further Studies
+
+1. **Session Duration Analysis**:
+   - Include session duration to better understand the correlation between time spent on the platform and conversion likelihood.
+
+2. **Demographic Analysis**:
+   - Add demographic data to provide deeper insights into how different user segments behave and convert.
+
+3. **Behavioral Segmentation**:
+   - Segment users based on behavioral patterns (e.g., frequently returning users vs. one-time visitors) to identify precise engagement strategies.
+
+---
+
+## Conclusion
+
+The analysis reveals key insights into user behavior, conversion paths, and drop-off points on 365’s subscription-based learning platform. By optimizing user journeys, enhancing the pricing page, leveraging promotional offers, addressing drop-offs from informational pages, and tailoring strategies for different subscription types, 365 can increase its conversion rates and reduce user churn. Incorporating session duration and demographic data into future analyses could yield even more actionable insights.
